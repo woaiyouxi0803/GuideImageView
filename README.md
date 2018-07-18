@@ -7,9 +7,14 @@ support light on UITabBarItem
 ![](2.png)
 
 常用方法：
+
+
+
 #####一、主要用于普通View
 
+
 `- (void)addGuideWithMaskView:(UIView*)maskView imageName:(NSString*)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;`
+
 
 这里解释下maskImageRect和confirmRect。
 
@@ -31,10 +36,15 @@ demo中使用方法为
 
 --------------
 
+
+
 #####二、对于UITabBarItem，则根据下面方法
 
+
 `- (void)addGuideWithTabBarItemIndex:(NSUInteger)index imageName:(NSString*)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;`
+
 demo：
+
 `[[[GuideImageView alloc] init] addGuideWithTabBarItemIndex:index imageName:@"Group4" imageSize:CGSizeMake(218, 313) maskImageRect:CGRectMake(20, 255, 60, 58) confirmRect:CGRectMake(60, 0, 120, 40) clickBlock:clickBlock]`
 
 -----
