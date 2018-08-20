@@ -4,7 +4,12 @@ Object-C ，GuideImageView,新手引导
 [简书 https://www.jianshu.com/p/b40f5decd085](https://www.jianshu.com/p/b40f5decd085)
 
 support light on UITabBarItem
+
 ![](2.png)
+
+新增mask
+
+![](3.png)
 
 常用方法：
 
