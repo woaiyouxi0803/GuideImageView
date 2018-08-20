@@ -58,8 +58,11 @@ maskRect.center == maskViewRect.center
 
 `- (void)hollowWithGuideImageViewMaskType:(GuideImageViewMask)maskType cornerRadius:(CGFloat)cornerRadius maskView:(UIView *)maskView imageName:(NSString *)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;
 `
+
 demo:
+
 `[maskGuidImageView hollowWithGuideImageViewMaskType:GuideImageViewMaskRoundRect cornerRadius:15 maskView:view imageName:@"Coin_Speed_BlackSecond6" imageSize:CGSizeMake(270, 185) maskImageRect:CGRectMake(80, -30, 80+30, 30) confirmRect:CGRectMake(0, 0, 270, 185) clickBlock:clickBlock];`
+
 or
 
 `    [maskGuidImageView hollowWithGuideImageViewMaskType:GuideImageViewMaskRoundRect cornerRadius:48/2.0];
