@@ -19,6 +19,7 @@
     if (self) {
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
         self.frame = [UIScreen mainScreen].bounds;
+        [self addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(otherTapClick)]];
     }
     return self;
 }
@@ -194,6 +195,14 @@
         {
             [self removeFromSuperview];
         }
+    }
+}
+
+- (void)otherTapClick
+{
+    if (_clickBlock)
+    {
+        _clickBlock(GuideImageViewClickOther);
     }
 }
 

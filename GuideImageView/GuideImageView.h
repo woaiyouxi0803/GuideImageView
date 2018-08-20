@@ -5,7 +5,8 @@
 typedef NS_ENUM(NSInteger, GuideImageViewClick) {
     GuideImageViewClickNone,
     GuideImageViewClickMaskButton,
-    GuideImageViewClickConfirmButton
+    GuideImageViewClickConfirmButton,
+    GuideImageViewClickOther
 };
 
 
