@@ -14,4 +14,8 @@
 
 + (void)guideTabbarItemAtIndex:(NSUInteger)index clickBlock:(GuideImageViewClickBlock)clickBlock;
 
++ (void)maskExample:(UIView *)view clickBlock:(GuideImageViewClickBlock)clickBlock;
+
++ (void)maskTabbarItemAtIndex:(NSUInteger)index clickBlock:(GuideImageViewClickBlock)clickBlock;
+
 @end

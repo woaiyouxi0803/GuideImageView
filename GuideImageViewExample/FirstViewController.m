@@ -11,6 +11,8 @@
 
 @interface FirstViewController ()
 @property (nonatomic ,strong) UIButton *exampleView;
+@property (nonatomic ,strong) UIButton *maskExampleView;
+
 @end
 
 @implementation FirstViewController
@@ -27,13 +29,26 @@
     _exampleView.backgroundColor = [UIColor yellowColor];
     _exampleView.frame = CGRectMake(220, 120, 80, 30);
     
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(50, 150, 100, 50);
-    button.backgroundColor = [UIColor redColor];
-    [button setTitle:@"guideTabbar" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(guideTabbarItemAtIndex) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    UIButton * guideTabbarItembutton = [UIButton buttonWithType:UIButtonTypeSystem];
+    guideTabbarItembutton.frame = CGRectMake(50, 150, 120, 50);
+    guideTabbarItembutton.backgroundColor = [UIColor redColor];
+    [guideTabbarItembutton setTitle:@"guideTabbarItem" forState:UIControlStateNormal];
+    [guideTabbarItembutton addTarget:self action:@selector(guideTabbarItemAtIndex) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:guideTabbarItembutton];
 
+    _maskExampleView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:_maskExampleView];
+    [_maskExampleView setTitle:@"点击加速" forState:(UIControlStateNormal)];
+    [_maskExampleView addTarget:self action:@selector(maskExample) forControlEvents:UIControlEventTouchUpInside];
+    _maskExampleView.backgroundColor = [UIColor blueColor];
+    _maskExampleView.frame = CGRectMake(220, 180, 80, 30);
+    
+    UIButton * maskTabbarItembutton = [UIButton buttonWithType:UIButtonTypeSystem];
+    maskTabbarItembutton.frame = CGRectMake(50, 270, 120, 50);
+    maskTabbarItembutton.backgroundColor = [UIColor redColor];
+    [maskTabbarItembutton setTitle:@"maskTabbarItem" forState:UIControlStateNormal];
+    [maskTabbarItembutton addTarget:self action:@selector(maskTabbarItemAtIndex) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:maskTabbarItembutton];
 }
 
 - (void)guidExample
@@ -46,6 +61,20 @@
 - (void)guideTabbarItemAtIndex
 {
     [GuideManager guideTabbarItemAtIndex:0 clickBlock:^(GuideImageViewClick click) {
+        NSLog(@"block click:%zd",click);
+    }];
+}
+
+- (void)maskExample
+{
+    [GuideManager maskExample:_maskExampleView clickBlock:^(GuideImageViewClick click) {
+        NSLog(@"block click:%zd",click);
+    }];
+}
+
+- (void)maskTabbarItemAtIndex
+{
+    [GuideManager maskTabbarItemAtIndex:1 clickBlock:^(GuideImageViewClick click) {
         NSLog(@"block click:%zd",click);
     }];
 }

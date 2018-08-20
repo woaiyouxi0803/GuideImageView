@@ -41,12 +41,18 @@
     }
     
     maskViewRect = [maskView.superview convertRect:maskView.frame toView:[UIApplication sharedApplication].keyWindow];
+    ///maskRect.size == maskImageRect.size && maskRect.center == maskViewRect.center
+    _maskRect = CGRectMake(maskViewRect.origin.x + (maskViewRect.size.width - maskImageRect.size.width)/2.0 , maskViewRect.origin.y + (maskViewRect.size.height - maskImageRect.size.height)/2.0, maskImageRect.size.width, maskImageRect.size.height);
+    
     [self addGuideWithMaskViewRect:maskViewRect imageName:imageName imageSize:imageSize maskImageRect:maskImageRect confirmRect:confirmRect clickBlock:clickBlock];
 }
 
 - (void)addGuideWithTabBarItemIndex:(NSUInteger)index imageName:(NSString *)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock
 {
     CGRect maskViewRect = [self getTabBarItemConvertRectTokeyWindowAtIndex:index];
+    /// (maskViewRect.size.height = 48)
+    /// maskRect.size == maskImageRect.size && maskRect.center == maskViewRect.center
+    _maskRect = CGRectMake(maskViewRect.origin.x + (maskViewRect.size.width - maskImageRect.size.width)/2.0 , maskViewRect.origin.y,  maskImageRect.size.width, maskImageRect.size.height);
     
     [self addGuideWithMaskViewRect:maskViewRect imageName:imageName imageSize:imageSize maskImageRect:maskImageRect confirmRect:confirmRect clickBlock:clickBlock];
 }
@@ -54,6 +60,7 @@
 #pragma mark - ************* 基础方法 ******************
 - (void)addGuideWithMaskViewRect:(CGRect)maskViewRect imageName:(NSString *)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock
 {
+    self.layer.mask = nil;
     _clickBlock = clickBlock;
     
     if (!_imageView)
@@ -134,6 +141,36 @@
     return CGRectZero;
 }
 
+#pragma mark - ************* 普通View镂空效果 ******************
+
+- (void)hollowWithGuideImageViewMaskType:(GuideImageViewMask)maskType cornerRadius:(CGFloat)cornerRadius maskView:(UIView *)maskView imageName:(NSString *)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock
+{
+    [self addGuideWithMaskView:maskView imageName:imageName imageSize:imageSize maskImageRect:maskImageRect confirmRect:confirmRect clickBlock:clickBlock];
+
+    [self hollowWithGuideImageViewMaskType:maskType cornerRadius:cornerRadius];
+}
+
+#pragma mark - ************* 镂空效果 ******************
+
+- (void)hollowWithGuideImageViewMaskType:(GuideImageViewMask)maskType cornerRadius:(CGFloat)cornerRadius
+{
+    if (maskType != GuideImageViewMaskNone)
+    {
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:[UIApplication sharedApplication].keyWindow.bounds];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        if (maskType == GuideImageViewMaskRoundRect)
+        {
+            [path appendPath:[[UIBezierPath bezierPathWithRoundedRect:_maskRect cornerRadius:cornerRadius] bezierPathByReversingPath]];
+        }else if (maskType == GuideImageViewMaskCircumcircle)
+        {
+            CGPoint point = CGPointMake(_maskRect.origin.x + _maskRect.size.width/2.0, _maskRect.origin.y + _maskRect.size.height/2.0);
+            CGFloat leg = hypotf((_maskRect.size.width/2), (_maskRect.size.height/2));
+            [path appendPath:[UIBezierPath bezierPathWithArcCenter:point radius:leg startAngle:0 endAngle:2*M_PI clockwise:NO]];
+        }
+        maskLayer.path = path.CGPath;
+        self.layer.mask = maskLayer;
+    }
+}
 
 #pragma mark - ************* 点击 ******************
 - (void)buttonClick:(UIButton *)button
