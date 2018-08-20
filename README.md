@@ -10,7 +10,7 @@ support light on UITabBarItem
 
 
 
-#####一、主要用于普通View
+####一、主要用于普通View
 
 
 `- (void)addGuideWithMaskView:(UIView*)maskView imageName:(NSString*)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;`
@@ -38,7 +38,7 @@ demo中使用方法为
 
 
 
-#####二、对于UITabBarItem，则根据下面方法
+####二、对于UITabBarItem，则根据下面方法
 
 
 `- (void)addGuideWithTabBarItemIndex:(NSUInteger)index imageName:(NSString*)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;`
@@ -48,3 +48,19 @@ demo：
 `[[[GuideImageView alloc] init] addGuideWithTabBarItemIndex:index imageName:@"Group4" imageSize:CGSizeMake(218, 313) maskImageRect:CGRectMake(20, 255, 60, 58) confirmRect:CGRectMake(60, 0, 120, 40) clickBlock:clickBlock]`
 
 -----
+####三、新增。带镂空效果
+镂空区域为maskRect，中心与maskView.center对齐，大小为maskImageRect.size
+```
+maskRect.size == maskImageRect.size  &&
+maskRect.center == maskViewRect.center
+```
+方法:
+
+`- (void)hollowWithGuideImageViewMaskType:(GuideImageViewMask)maskType cornerRadius:(CGFloat)cornerRadius maskView:(UIView *)maskView imageName:(NSString *)imageName imageSize:(CGSize)imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock;
+`
+demo:
+`[maskGuidImageView hollowWithGuideImageViewMaskType:GuideImageViewMaskRoundRect cornerRadius:15 maskView:view imageName:@"Coin_Speed_BlackSecond6" imageSize:CGSizeMake(270, 185) maskImageRect:CGRectMake(80, -30, 80+30, 30) confirmRect:CGRectMake(0, 0, 270, 185) clickBlock:clickBlock];`
+or
+
+`    [maskGuidImageView hollowWithGuideImageViewMaskType:GuideImageViewMaskRoundRect cornerRadius:48/2.0];
+`

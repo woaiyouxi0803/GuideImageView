@@ -178,7 +178,7 @@
 {
     if (button == _maskButton)
     {
-        NSLog(@"_maskButton");
+//        NSLog(@"_maskButton");
         if (_clickBlock)
         {
             _clickBlock(GuideImageViewClickMaskButton);
@@ -186,7 +186,7 @@
     }
     else if (button == _confirmButton)
     {
-        NSLog(@"_confirmButton");
+//        NSLog(@"_confirmButton");
         if (_clickBlock)
         {
             _clickBlock(GuideImageViewClickConfirmButton);
@@ -200,6 +200,7 @@
 
 - (void)otherTapClick
 {
+//    NSLog(@"otherTapClick");
     if (_clickBlock)
     {
         _clickBlock(GuideImageViewClickOther);
