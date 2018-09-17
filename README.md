@@ -7,7 +7,7 @@ support light on UITabBarItem
 
 ![](2.png)
 
-新增mask
+新增hollow镂空,
 
 ![](3.png)
 

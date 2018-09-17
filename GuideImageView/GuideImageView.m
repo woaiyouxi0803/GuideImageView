@@ -27,7 +27,7 @@
 - (void)addGuideWithMaskView:(UIView *)maskView imageName:(NSString *)imageName imageSize:(CGSize )imageSize maskImageRect:(CGRect)maskImageRect confirmRect:(CGRect)confirmRect clickBlock:(GuideImageViewClickBlock)clickBlock
 {
     CGRect maskViewRect;
-    BOOL err;
+    BOOL err = NO;
     @try{
         [maskView superview];
     }@catch(NSException *exception){
